@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<extension version="3.x" type="plugin" group="vmpayment" method="upgrade">
+	<name>پلاگین درگاه پرداخت بانک ملی برای ویرچومارت ۳</name>
+	<creationDate>96/01/05</creationDate>
+	<author>AlmaaTech</author>
+	<authorUrl>http://almaatech.ir</authorUrl>
+	<copyright>http://almaatech.ir</copyright>
+	<license>http://www.gnu.org/licenses/gpl-2.0.html GNU/GPL</license>
+	<version>3.0.2</version>
+	<description>
+		<![CDATA[
+		<body>
+		    <h4 style="text-align:center" align="center" dir="rtl">
+		    پلاگین پرداخت بانک ملی برای کامپوننت ویرچومارت ۳
+		    </h4>
+		</body>
+	]]>
+	</description>
+	<files>
+		<filename plugin="melli">melli.php</filename>
+		<filename>melli.xml</filename>
+		<filename>index.html</filename>
+		<folder>language</folder>
+	</files>
+	<languages folder="language">
+		<language tag="fa-IR">fa-IR/fa-IR.plg_vmpayment_melli.ini</language>
+	</languages>
+
+	<vmconfig>
+		<fields name="params">
+			<fieldset name="basic" addfieldpath="/administrator/components/com_virtuemart/elements">
+				<field type="spacer" name="spacer" label="افزونه درگاه پرداخت بانک ملی برای ویرچو مارت"/>
+				<field type="text" name="merchant_id" label="شناسه پذیرنده" description="شناسه پذیرنده"/>
+				<field type="text" name="terminal_id" label="شناسه ترمینال" description="شناسه ترمینال"/>
+				<field type="text" name="terminal_key" label="کلید تراکنش" description="کلید تراکنش"/>
+			</fieldset>
+		</fields>
+	</vmconfig>
+</extension>
