@@ -528,20 +528,36 @@ tmpl;
 
 			return $conn->loadobject();
 		}
-		private function sadad_encrypt($data, $secret) {
-			//Generate a key from a hash
-			$key = base64_decode($secret);
+		
+		
+		//Create sign data(Tripledes(ECB,PKCS7)) using mcrypt
+		private function mcrypt_encrypt_pkcs7($str, $key) {
+			$block = mcrypt_get_block_size("tripledes", "ecb");
+			$pad = $block - (strlen($str) % $block);
+			$str .= str_repeat(chr($pad), $pad);
+			$ciphertext = mcrypt_encrypt("tripledes", $key, $str,"ecb");
+			return base64_encode($ciphertext);
+		}
 
-			//Pad for PKCS7
-			$blockSize = mcrypt_get_block_size('tripledes', 'ecb');
-			$len = strlen($data);
-			$pad = $blockSize - ($len % $blockSize);
-			$data .= str_repeat(chr($pad), $pad);
+		//Create sign data(Tripledes(ECB,PKCS7)) using openssl
+		private function openssl_encrypt_pkcs7($key, $data) {
+			$ivlen = openssl_cipher_iv_length('des-ede3');
+			$iv = openssl_random_pseudo_bytes($ivlen);
+			$encData = openssl_encrypt($data, 'des-ede3', $key, 0, $iv);
+			return $encData;
+		}
 
-			//Encrypt data
-			$encData = mcrypt_encrypt('tripledes', $key, $data, 'ecb');
 
-			return base64_encode($encData);
+		private function sadad_encrypt($data, $key) {
+			$key = base64_decode($key);
+			if( function_exists('openssl_encrypt') ) {
+				return $this->openssl_encrypt_pkcs7($key, $data);
+			} elseif( function_exists('mcrypt_encrypt') ) {
+				return $this->mcrypt_encrypt_pkcs7($data, $key);
+			} else {
+				return '';
+			}
+
 		}
 
 		private function sadad_call_api($url, $data = false) {
