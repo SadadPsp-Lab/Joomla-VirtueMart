@@ -19,7 +19,6 @@
 	<files>
 		<filename plugin="melli">melli.php</filename>
 		<filename>melli.xml</filename>
-		<filename>index.html</filename>
 		<folder>language</folder>
 	</files>
 	<languages folder="language">
