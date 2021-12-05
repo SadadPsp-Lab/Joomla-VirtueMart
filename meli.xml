@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<extension version="3.9" type="plugin" group="vmpayment" method="upgrade">
+
+    <name>Sadad Gateway for VirtueMart</name>
+    <description>PLG_J2STORE_SADAD</description>
+    <version>1.1</version>
+    <author>Developer: almaatech - sadad-psp</author>
+    <authorUrl>https://almaatech.ir</authorUrl>
+    <authorEmail>info@almaatech.ir</authorEmail>
+    <creationDate>November 2021</creationDate>
+    <copyright>Copyright (C) 2021 SADAD</copyright>
+    <license>http://www.gnu.org/licenses/gpl-2.0.html GPLv2 or later</license>
+
+    <files>
+        <filename plugin="meli">meli.php</filename>
+        <folder>helper</folder>
+        <folder>meli</folder>
+    </files>
+
+    <vmconfig>
+        <fields name="params">
+            <fieldset name="basic" addfieldpath="/administrator/components/com_virtuemart/elements">
+                <field type="text" name="merchant" label="شماره پذیرنده" description=""/>
+                <field type="text" name="terminal" label="ترمینال" description=""/>
+                <field type="text" name="key" label="کلید ترمینال" description=""/>
+                <field name="currency" type="list" default="rial" label="واحد پولی فروشگاه" description="">
+                    <option value="rial">RIAL</option>
+                    <option value="toman">TOMAN</option>
+                </field>
+            </fieldset>
+        </fields>
+    </vmconfig>
+
+</extension>
